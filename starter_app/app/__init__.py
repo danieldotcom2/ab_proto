@@ -2,18 +2,22 @@ import os
 from flask import Flask, render_template, request, session
 from flask_cors import CORS
 from flask_wtf.csrf import CSRFProtect, generate_csrf
-
+from flask_migrate import Migrate
 
 from .models import db, User
 from .api.user_routes import user_routes
+from .api.subdomains import subdomain_routes
+from .api.forms import form_routes
 
 from .config import Config
 
 app = Flask(__name__)
-
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
+app.register_blueprint(subdomain_routes, url_prefix='/api/subdomains')
+app.register_blueprint(form_routes, url_prefix='/api/forms')
 db.init_app(app)
+Migrate(app, db)
 
 ## Application Security
 CORS(app)
@@ -32,5 +36,7 @@ def inject_csrf_token(response):
 def react_root(path):
     print("path", path)
     if path == 'favicon.ico':
+        print("favicon route_____")
         return app.send_static_file('favicon.ico')
+    print("index route_____")
     return app.send_static_file('index.html')

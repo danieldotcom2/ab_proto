@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router'
 import FormBody from './FormBody';
-import FormHeader from './FormHeader';
+import FormHeader from './form-header/FormHeader';
 
 
 const Form = (props)=>{
@@ -21,8 +21,8 @@ const Form = (props)=>{
     }, []);
 
     return (
-        <div className="form-editor__main"> 
-            <FormHeader title={form.form_title} ></FormHeader>
+        <div className="form-editor__main">
+            <FormHeader form={form}></FormHeader>
             <FormBody form={form}/>
             {/* <FormSections></FormSections> */}
         </div>

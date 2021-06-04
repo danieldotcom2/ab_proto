@@ -26,6 +26,7 @@ export default function NewFormModal(props) {
     const [open, setOpen] = React.useState();
     const [newFormName,setNewFormName] = useState("")
     const [creatingForm,setCreatingForm] =useState(false)
+    const [createdForm,setCreatedForm] =useState({})
 
     const handleOpen = () => {
         setOpen(true);
@@ -41,7 +42,7 @@ export default function NewFormModal(props) {
 
     const handleCreateForm = () => {
         if (newFormName) {
-            setCreatingForm(!creatingForm)
+            setCreatingForm(true)
         }
     }
 
@@ -57,18 +58,22 @@ export default function NewFormModal(props) {
                 "Content-Type": "application/json",
                 "X-CSRF-TOKEN": csrfToken,
                 },
-                method:'POST',
-                body: {
-                    jsonForm
-                }
+                method:"POST",
+                body: jsonForm
             })
             const data = await response.json();
-            console.log(data)
-          
+            setCreatingForm(false)
+            setCreatedForm(data.form)
       }
-      createForm({subdomain_id:id,form_name:newFormName})
+      if (creatingForm) {
+        createForm({subdomain_id:id,form_name:newFormName})
+      }
     }
   ,[creatingForm])
+
+  if (createdForm.id) {
+    return <Redirect to={`/forms/${createdForm.id}`}/>
+  }
 
   return (
     <div>
