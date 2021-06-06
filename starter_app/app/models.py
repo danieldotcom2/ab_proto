@@ -127,6 +127,7 @@ class Question_Response(db.Model):
   name = db.Column(db.String(1000), nullable = False)
   question_id = db.Column(db.Integer, db.ForeignKey("questions.id"))
   order = db.Column(db.Integer)
+  label = db.Column(db.String(1000),nullable=True)
 
   question = db.relationship("Question",back_populates="question_responses")
 
@@ -135,7 +136,8 @@ class Question_Response(db.Model):
       "id":self.id,
       "name":self.name,
       "question_id":self.question_id,
-      "order":self.order
+      "order":self.order,
+      "label":self.label
     }
 
 

@@ -9,6 +9,7 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import QuestionForm from './QuestionForm'
+import QuestionTabs from './QuestionTabs';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -46,7 +47,7 @@ const NewQuestionHeader = () => {
                 justifyContent:"center"
             }}>
             {  headerSubmit && questionLabel && type ?
-                <QuestionForm label={questionLabel} type={type}></QuestionForm>
+                <QuestionTabs label={questionLabel} type={type} responses={[]}></QuestionTabs>
                 :
                 <>  
             <form style={{width:"100%"}} onSubmit={(e)=>{

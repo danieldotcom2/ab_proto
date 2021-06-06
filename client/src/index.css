@@ -77,8 +77,17 @@
   transition: background-color .2s ease-in-out;
 }
 
+.MuiPaper-root.MuiAppBar-colorSecondary {
+  background-color: #1976d2;
+  box-shadow: none;
+}
+
 .form-field:hover {
   background-color: whitesmoke;
+}
+
+.makeStyles-root-42 {
+  box-shadow: rgb(60 64 67 / 30%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 1px 3px 1px;
 }
 
 .form-question-section {
@@ -91,7 +100,6 @@
   border-radius: 4px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;  background-color: #fff;
   position:relative;
-  padding-top: 22px;
   padding-bottom:24px;
   padding-left: 16px;
   padding-right:16px;
@@ -146,6 +154,10 @@
   padding-right:16px;
   display:flex;
   flex-direction: column;
+}
+
+.MuiTab-wrapper {
+  text-transform: none;
 }
 
 /* .form-header-stripe {

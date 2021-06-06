@@ -76,6 +76,7 @@ const QuestionForm = (props) => {
                 <option value={7}>Long Text</option>
                 </Select>
             </FormControl>
+            
             </div>
     )
 }

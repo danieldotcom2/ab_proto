@@ -77,7 +77,7 @@ export default function FormTranslationsField() {
 
   return (
       <FormControl className={classes.formControl} variant="outlined">
-        <InputLabel id="demo-mutiple-chip-label">Form Provided Translations</InputLabel>
+        <InputLabel id="demo-mutiple-chip-label">Provided Translations</InputLabel>
         <Select
           variant="outlined"
           labelId="demo-mutiple-chip-label"

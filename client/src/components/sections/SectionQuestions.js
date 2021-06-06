@@ -14,7 +14,7 @@ const SectionQuestions = (props) => {
         <>
             {questions.map((question,index)=>{
                 return (
-                    <Question question={question}></Question>
+                    <Question question={question} index={index}></Question>
                 )
             })}
 
