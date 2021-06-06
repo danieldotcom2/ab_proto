@@ -11,6 +11,7 @@
     "chroma-js": "^2.1.2",
     "http-proxy-middleware": "^1.0.5",
     "js-cookie": "^2.2.1",
+    "langs": "^2.0.0",
     "radium": "^0.26.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

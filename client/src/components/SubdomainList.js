@@ -29,7 +29,6 @@ function SubdomainList (props) {
             <SubdomainCard key={subdomain.id} subdomain={subdomain}/>
         </NavLink>)
     
-    console.log("____Rendering User List____")
     return (
         <>
             <h4>Subdomains: </h4>

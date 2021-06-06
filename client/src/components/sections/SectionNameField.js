@@ -3,7 +3,6 @@ import { Grid, Container, Card, InputBase, CircularProgress, Input, TextareaAuto
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router';
-import FormNameFieldDisplay from './FormNameFieldDisplay';
 import Cookies from 'js-cookie'
 
 const useStyles = makeStyles((theme) => ({
@@ -50,17 +49,18 @@ const RedColorButton = withStyles((theme) => ({
     }))(Button);
 
 
-export default function FormNameField(props) {
+export default function SectionNameField(props) {
     const classes = useStyles();
     const [edit,setEdit]=useState(false)
     const [name,setName] = useState("")
     const [formName,setFormName] = useState("")
     const [savingForm,setSavingForm] =useState(false)
     const [currentName,setCurrentName] = useState("")
+    const [sectionId,setSectionId] = useState(props.sectionId)
 
     useEffect(()=>{
-        setName(props.formName)
-        setCurrentName(props.formName)
+        setName(props.sectionName)
+        setCurrentName(props.sectionName)
     },[props])
 
     const handleSave = () => {
@@ -77,9 +77,9 @@ export default function FormNameField(props) {
     useEffect(() => {
         const saveForm = async (formName) => {
             const csrfToken = Cookies.get("XSRF-TOKEN")
-            const nameObj = {form_name:name}
+            const nameObj = {section_name:name}
             const jsonForm = JSON.stringify(nameObj)
-            const response = await fetch(`/api/forms/update-form-name/${id}`,{
+            const response = await fetch(`/api/sections/update-name/${sectionId}`,{
                 headers: {
                 "Content-Type": "application/json",
                 "X-CSRF-TOKEN": csrfToken,
@@ -88,8 +88,8 @@ export default function FormNameField(props) {
                 body: jsonForm
             })
             const data = await response.json();
+            setCurrentName(data.section.name)
             setSavingForm(false)
-            setCurrentName(data.form.form_name)
             // setCreatedForm(data.form)
       }
       if (savingForm) {
@@ -100,20 +100,21 @@ export default function FormNameField(props) {
 
     return (
         <>
-            <div className={"form-field"} style={{display:'flex',flexDirection:'row'}}>
+            <div style={{display:'flex',flexDirection:'row'}}>
                 <form onSubmit={(e)=>{
                     e.preventDefault()
                     handleSave()
                     }
                 }>
                 <TextField  
+                    autoFocus 
                     required
                     size="small"
                     onChange={(e)=>setName(e.target.value)} 
                     value={name}
-                    label="Form Name"
-                    placeholder="Enter a name for your form..."
-                    helperText="This should be fairly short but also descriptive. Forms are displayed by their form name along other forms in drop-down menus and other lists."
+                    label="Section Name"
+                    placeholder="Enter a name for this section..."
+                    helperText="Section names ar optional and will appear at the top of each form section"
                     size="small"
                     style={{paddingLeft:"10px"}}
                     margin="normal"
@@ -126,19 +127,18 @@ export default function FormNameField(props) {
                                     }}
                 />
                 {
-                    currentName === name 
-                    ? 
+                    name === currentName 
+                    ?
                     <></>
-                    :   
-                <div style={{display:'flex',flexDirection:'row',justifyContent:"flex-end"}}>
+                    :
+                    <div style={{display:'flex',flexDirection:'row',justifyContent:"flex-end"}}>
                     <GreenColorButton fullWidth={false} onClick={handleSave}>
                         save
                     </GreenColorButton>
                     <RedColorButton fullWidth={false} onClick={handleCancel}>
                         cancel
                     </RedColorButton>
-                </div>
-                }
+                </div>}
                 </form>
             </div>
         </>

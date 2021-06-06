@@ -39,7 +39,7 @@ const PrimaryDisplay = () => {
             <div style={{
                 width:"180px",
                 border: colorContext.primary === "#FFFFFF" ?  "1px solid grey" : "",
-                height:"100px",
+                height:"170px",
                 backgroundColor:colorContext.primary ? colorContext.primary : "white",
                 margin:"auto",
                 marginBottom:"0px",

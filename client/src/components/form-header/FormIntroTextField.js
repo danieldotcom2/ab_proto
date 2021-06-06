@@ -3,7 +3,7 @@ import { Grid, Container, Card, InputBase, CircularProgress, Input, TextareaAuto
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router';
-import FormNameFieldDisplay from './FormNameFieldDisplay';
+import FormIntroTextFieldDisplay from './FormIntroTextFieldDisplay';
 import Cookies from 'js-cookie'
 
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +50,7 @@ const RedColorButton = withStyles((theme) => ({
     }))(Button);
 
 
-export default function FormNameField(props) {
+export default function FormIntroTextField(props) {
     const classes = useStyles();
     const [edit,setEdit]=useState(false)
     const [name,setName] = useState("")
@@ -79,7 +79,7 @@ export default function FormNameField(props) {
             const csrfToken = Cookies.get("XSRF-TOKEN")
             const nameObj = {form_name:name}
             const jsonForm = JSON.stringify(nameObj)
-            const response = await fetch(`/api/forms/update-form-name/${id}`,{
+            const response = await fetch(`/api/forms/update-form-intro-text/${id}`,{
                 headers: {
                 "Content-Type": "application/json",
                 "X-CSRF-TOKEN": csrfToken,
@@ -88,8 +88,8 @@ export default function FormNameField(props) {
                 body: jsonForm
             })
             const data = await response.json();
+            setCurrentName(data.form.form_intro_text)
             setSavingForm(false)
-            setCurrentName(data.form.form_name)
             // setCreatedForm(data.form)
       }
       if (savingForm) {
@@ -100,22 +100,28 @@ export default function FormNameField(props) {
 
     return (
         <>
-            <div className={"form-field"} style={{display:'flex',flexDirection:'row'}}>
-                <form onSubmit={(e)=>{
+            <div className={'form-field'} style={{display:'flex',flexDirection:'row',justifyContent:"center"}}>
+                <form 
+                    style={{width:"100%",maxWidth:"750px"}}
+                    onSubmit={(e)=>{
                     e.preventDefault()
                     handleSave()
                     }
                 }>
-                <TextField  
-                    required
-                    size="small"
+                <TextField 
+                    required={false}
+                    multiline
+                    fullWidth
+                    rows={3}
+                    variant={"outlined"}
+                    rowsMax={Infinity}
                     onChange={(e)=>setName(e.target.value)} 
                     value={name}
-                    label="Form Name"
-                    placeholder="Enter a name for your form..."
-                    helperText="This should be fairly short but also descriptive. Forms are displayed by their form name along other forms in drop-down menus and other lists."
+                    label="Form Intro Text"
+                    placeholder="Enter intro text for your form..."
+                    helperText="This optional text appears at the top of the form."
                     size="small"
-                    style={{paddingLeft:"10px"}}
+                    style={{paddingLeft:"10px",paddingRight:"10px"}}
                     margin="normal"
                     InputLabelProps={{
                         shrink: true,
@@ -126,19 +132,18 @@ export default function FormNameField(props) {
                                     }}
                 />
                 {
-                    currentName === name 
-                    ? 
+                    currentName === name
+                    ?
                     <></>
-                    :   
-                <div style={{display:'flex',flexDirection:'row',justifyContent:"flex-end"}}>
+                    :
+                    <div style={{display:'flex',flexDirection:'row',justifyContent:"flex-end"}}>
                     <GreenColorButton fullWidth={false} onClick={handleSave}>
                         save
                     </GreenColorButton>
                     <RedColorButton fullWidth={false} onClick={handleCancel}>
                         cancel
                     </RedColorButton>
-                </div>
-                }
+                </div>}
                 </form>
             </div>
         </>

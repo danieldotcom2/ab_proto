@@ -5,7 +5,6 @@ import SubdomainList from './components/SubdomainList';
 import SubdomainFormList from './components/SubdomainFormList';
 
 function App() {
-  console.log("____Rendering app_____")
   return (
     <BrowserRouter>
         <div className={"nav-bar"}> 

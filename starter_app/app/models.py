@@ -34,7 +34,7 @@ class Form(db.Model):
   custom_color_secondary_dark = db.Column(db.String(300), nullable=True)
 
   
-  form_sections = db.relationship("Form_Section",back_populates="form")
+  sections = db.relationship("Section",back_populates="form")
   subdomain = db.relationship("Subdomain",back_populates="forms")
 
   def to_dict(self):
@@ -50,16 +50,27 @@ class Form(db.Model):
     }
   
 
-class Form_Section(db.Model):
-  __tablename__ = 'form_sections'
+class Section(db.Model):
+  __tablename__ = 'sections'
 
   id = db.Column(db.Integer, primary_key = True)
-  form_section_name = db.Column(db.String(1000), nullable = True)
+  name = db.Column(db.String(1000), nullable = True)
   description = db.Column(db.String(2000), nullable=True)
-  form_id = db.Column(db.Integer, db.ForeignKey("forms.id"),nullable= False)
+  form_id = db.Column(db.Integer, db.ForeignKey("forms.id"),nullable=False)
+  order = db.Column(db.Integer,nullable=True)
   
-  form = db.relationship("Form",back_populates="form_sections")
-  questions = db.relationship("Question",back_populates="form_section")
+  form = db.relationship("Form",back_populates="sections")
+  questions = db.relationship("Question",back_populates="section")
+
+  def to_dict(self):
+    return {
+      "id":self.id,
+      "name":self.name,
+      "description":self.description,
+      "form_id":self.form_id,
+      "order":self.order,
+      "questions": [question.to_dict() for question in self.questions]
+    }
 
 
 class Subdomain(db.Model):
@@ -77,7 +88,6 @@ class Subdomain(db.Model):
     }
 
 
-
 class Question(db.Model):
   __tablename__ = 'questions'
 
@@ -85,14 +95,48 @@ class Question(db.Model):
   name = db.Column(db.String(1000), nullable = False)
   label = db.Column(db.String(1000), nullable = False)
   description = db.Column(db.String(1000), nullable = False)
-  help_text = db.Column(db.String(300))
+  help_text = db.Column(db.String(300),nullable=True)
   required = db.Column(db.Boolean, default=False,nullable=False)
   is_active = db.Column(db.Boolean, default=True,nullable=False)
-  type = db.Column(db.String(50),nullable=False)
+  type = db.Column(db.String(50),nullable=False,default={"mc"})
   order = db.Column(db.Integer)
-  section_id = db.Column(db.Integer, db.ForeignKey("form_sections.id"))
+  section_id = db.Column(db.Integer, db.ForeignKey("sections.id"))
 
-  form_section = db.relationship("Form_Section",back_populates="questions")
+  section = db.relationship("Section",back_populates="questions")
+  question_responses = db.relationship("Question_Response",back_populates="question")
+
+  def to_dict(self):
+    return {
+      "id":self.id,
+      "name":self.name,
+      "label":self.label,
+      "description":self.description,
+      "help_text":self.help_text,
+      "required":self.required,
+      "is_active":self.is_active,
+      "type":self.type,
+      "order":self.order,
+      "section_id":self.section_id,
+      "question_responses":[response.to_dict() for response in self.question_responses]
+    }
+
+
+class Question_Response(db.Model):
+  __tablename__ = 'question_responses'
+  id = db.Column(db.Integer, primary_key = True)
+  name = db.Column(db.String(1000), nullable = False)
+  question_id = db.Column(db.Integer, db.ForeignKey("questions.id"))
+  order = db.Column(db.Integer)
+
+  question = db.relationship("Question",back_populates="question_responses")
+
+  def to_dict(self):
+    return {
+      "id":self.id,
+      "name":self.name,
+      "question_id":self.question_id,
+      "order":self.order
+    }
 
 
 class Program_Tags(db.Model):
@@ -100,6 +144,7 @@ class Program_Tags(db.Model):
   
   id = db.Column(db.Integer, primary_key = True)
   name = db.Column(db.String(1000), nullable = False)
+
 
 class Goals(db.Model):
   __tablename__ = 'goals'

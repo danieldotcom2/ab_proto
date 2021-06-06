@@ -53,14 +53,18 @@ const RadiumFormNameField = ({formName,handleEdit}) => {
                 {formName ? formName : ""}
             </div> */}
             <TextField  
-                    required
                     value={formName}
-                    label="Form Name"
+                    required={false}
+                    multiline
+                    rows={3}
+                    fullWidth
+                    variant={"outlined"}
+                    rowsMax={Infinity}
+                    label="Form Intro Text"
+                    placeholder="Enter intro text for your form..."
+                    helperText="This optional text appears at the top of the form."
                     size="small"
-                    placeholder="Enter a name for your form..."
-                    helperText="This should be fairly short but also descriptive. Forms are displayed by their form name along other forms in drop-down menus and other lists."
-                    size="small"
-                    style={{paddingLeft:"10px"}}
+                    style={{paddingLeft:"10px",paddingRight:"10px"}}
                     margin="normal"
                     InputProps={{
                         className:classes.formInputProps

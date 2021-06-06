@@ -6,6 +6,8 @@ import FormNameField from './FormNameField';
 import FormTitleField from './FormTitleField';
 import chroma from 'chroma-js'
 import ColorPicker from '../color-picker/ColorPicker';
+import FormIntroTextField from './FormIntroTextField'
+import FormTranslationsField from './FormTranslationsField';
 
 const useStyles = makeStyles((theme) => ({
     formTitleText: {
@@ -53,9 +55,6 @@ const FormHeader = ({form}) => {
     const lighter = chroma("#7986cb").brighten().hex()
     const darken = chroma("#7986cb").darken().hex()
 
-    console.log("lighter: ",lighter)
-    console.log("darken: ",darken)
-    
     return (
         <>
             <div className="form-header__main form-section">
@@ -69,7 +68,9 @@ const FormHeader = ({form}) => {
                     <FormCustomColorSecondaryField/> */}
                     <FormNameField formName={formName}/>
                     <FormTitleField formTitle={formTitle}/>
-                    <ColorPicker secondary={secondaryColor} primaryColor={primaryColor}></ColorPicker>
+                    <FormIntroTextField formName={formIntroText}/>
+                    <ColorPicker secondary={secondaryColor} primary={primaryColor}></ColorPicker>
+                    <FormTranslationsField></FormTranslationsField>
                         {/* <TextField
                             label="Form Name"
                             placeholder="Enter a name for your form..."

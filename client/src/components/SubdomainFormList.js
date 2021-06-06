@@ -33,7 +33,6 @@ function SubdomainFormList (props) {
         <FormCard key={form.id} form={form}/>
     </NavLink>
     )
-    console.log("____Rendering User List____")
     return (
         <>
             <h3>

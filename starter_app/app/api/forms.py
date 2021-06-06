@@ -1,4 +1,4 @@
-from app.models import Form,db
+from app.models import Form,db, Section
 from flask import (Blueprint, jsonify, url_for, request, redirect, render_template)
 
 
@@ -14,8 +14,10 @@ def index():
 def create_form():
     data = request.json
     new_form = Form(form_name=data["form_name"],subdomain_id=data["subdomain_id"])
+    new_section = Section(name="",description="",form_id=new_form.id,order=0)
+    new_form.sections.append(new_section)
     db.session.add(new_form)
-    db.session.commit()
+    db.session.commit()    
     format_form = new_form.to_dict()
     return {"form":format_form}
   
@@ -24,6 +26,16 @@ def update_form_name(id):
     data = request.json
     form = Form.query.get(id)
     form.form_name=data["form_name"]
+    db.session.add(form)
+    db.session.commit()
+    format_form = form.to_dict()
+    return {"form":format_form}
+
+@form_routes.route('/update-form-intro-text/<id>',methods=['POST','PATCH'])
+def update_form_intro_texte(id):
+    data = request.json
+    form = Form.query.get(id)
+    form.form_intro_text=data["form_name"]
     db.session.add(form)
     db.session.commit()
     format_form = form.to_dict()

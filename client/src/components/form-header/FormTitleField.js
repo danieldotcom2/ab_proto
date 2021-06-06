@@ -16,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
     },
     helperText: {
         textAlign:"center",
+    },
+    inputProps: {
+        fontSize:"38px",
+        fontWeight:"lighter"
     }
   }));
 
@@ -57,6 +61,7 @@ export default function FormTitleField(props) {
 
     useEffect(()=>{
         setTitle(props.formTitle)
+        setCurrentTitle(props.formTitle)
     },[props])
 
     const handleSave = () => {
@@ -90,8 +95,7 @@ export default function FormTitleField(props) {
             })
             const data = await response.json();
             setSavingForm(false)
-            setEdit(false)
-            console.log(data)
+            setCurrentTitle(data.form.form_title)
             // setCreatedForm(data.form)
       }
       if (savingForm) {
@@ -102,45 +106,52 @@ export default function FormTitleField(props) {
 
     return (
         <>
-        {
-            edit
-            ?
-            <div style={{display:'flex',flexDirection:'column'}}>
-                <form onSubmit={(e)=>{
+            <div className={"form-field"} style={{display:'flex',flexDirection:'column'}}>
+                <form 
+                    style={{
+                        paddingLeft:"10px",
+                        paddingRight:"10px"
+                    }}
+                    onSubmit={(e)=>{
                     e.preventDefault()
                     handleSave()
                     }
                 }>
                 <TextField 
-                    fullWidth 
+                    fullWidth
                     autoFocus 
+                    required
                     onChange={(e)=>setTitle(e.target.value)} 
                     value={title}
+                    size="medium"
                     label="Form Title"
                     placeholder="Enter a title for your form..."
                     helperText="This can be the same as the form name, or a slightly longer version. Form titles appear at the top of a form when the form is open."
-                    variant="outlined"
                     margin="normal"
                     InputLabelProps={{
                         shrink: true,
+                    }}
+                    InputProps={{
+                        className: classes.inputProps
                     }}
                     FormHelperTextProps={{
                             className: classes.helperText
                                     }}
                 />
-                <div style={{display:'flex',flexDirection:'row',justifyContent:"flex-end"}}>
+                { currentTitle === title 
+                ? 
+                <></>
+                :
+                <div style={{display:'flex',flexDirection:'row',justifyContent:"flex-end",paddingRight:"6.48px"}}>
                     <GreenColorButton fullWidth={false} onClick={handleSave}>
                         save
                     </GreenColorButton>
                     <RedColorButton fullWidth={false} onClick={handleCancel}>
                         cancel
                     </RedColorButton>
-                </div>
+                </div>}
                 </form>
             </div>
-            :
-            <FormTitileFieldDisplay formTitle={title} handleEdit={handleEdit}/>
-        }
         </>
     )
 }

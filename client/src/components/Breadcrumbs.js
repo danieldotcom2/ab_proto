@@ -23,7 +23,6 @@ const StyledBreadcrumb = withStyles((theme) => ({
 
 function handleClick(event) {
   event.preventDefault();
-  console.info('You clicked a breadcrumb.');
 }
 
 export default function CustomizedBreadcrumbs() {

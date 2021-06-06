@@ -14,7 +14,6 @@ const ColorHexRow = (props) => {
         <div style={{display:"flex",flexDirection:"row",alignItems:"center",borderTop:"1px solid #E0E0E0"}}>
             <div style={{paddingLeft:"8px",minWidth:"80px",fontSize:"12px",color:"#616161"}}>{colorName}</div>
             {hexes.map(hex=>{
-                console.log(hex)
                 return (
                     <ColorHexBox hex={hex.code} index={hex.index} colorName={colorName}>
                         <></>

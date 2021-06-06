@@ -8,6 +8,7 @@ from .models import db, User
 from .api.user_routes import user_routes
 from .api.subdomains import subdomain_routes
 from .api.forms import form_routes
+from .api.sections import section_routes
 
 from .config import Config
 
@@ -16,6 +17,7 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(subdomain_routes, url_prefix='/api/subdomains')
 app.register_blueprint(form_routes, url_prefix='/api/forms')
+app.register_blueprint(section_routes, url_prefix='/api/sections')
 db.init_app(app)
 Migrate(app, db)
 

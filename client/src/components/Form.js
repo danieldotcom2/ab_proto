@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router'
 import FormBody from './FormBody';
 import FormHeader from './form-header/FormHeader';
+import FormContext from './FormContext';
+import FormSections from './sections/FormSections';
 
 
 const Form = (props)=>{
@@ -21,11 +23,13 @@ const Form = (props)=>{
     }, []);
 
     return (
-        <div className="form-editor__main">
-            <FormHeader form={form}></FormHeader>
-            <FormBody form={form}/>
-            {/* <FormSections></FormSections> */}
-        </div>
+        <FormContext.Provider value={{setForm,form}}>
+            <div className="form-editor__main">
+                <FormHeader form={form}></FormHeader>
+                <FormSections />
+                {/* <FormSections></FormSections> */}
+            </div>
+        </FormContext.Provider>
     )
 }
 

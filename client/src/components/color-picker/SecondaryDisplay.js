@@ -38,7 +38,7 @@ const SecondaryDisplay = () => {
             <span style={{color:"#616161",fontSize:"16px",padding:"8px"}}>Secondary</span>
             <div style={{
                 width:"180px",
-                height:"100px",
+                height:"170px",
                 backgroundColor:colorContext.secondary ? colorContext.secondary : "white",
                 margin:"auto",
                 marginBottom:"0px",
