@@ -1,6 +1,7 @@
-import { TextField } from '@material-ui/core';
+import { IconButton, TextField } from '@material-ui/core';
 import React, {useEffect, useState} from 'react'
-
+import SaveIcon from '@material-ui/icons/Save';
+import CustomTextField from './CustomTextField'
 const MultipleChoiceResponseForm = (props) => {
     const [responses,setResponses] = useState([])
     const [newResponseLabel,setNewResponseLabel] = useState("")
@@ -25,15 +26,28 @@ const MultipleChoiceResponseForm = (props) => {
 
     return (
         <div style={{display:"flex",flexDirection:"column",width:"100%"}}>
-            {responses.map((response,index)=>{
+            <div style={{display:"flex",flexDirection:"row",width:"100%"}}>
+            <div style={{display:"flex",flexDirection:"column",width:"100%",alignItems:"center"}}>
+                {responses.map((response,index)=>{
                 console.log("YYEEE")
                 return (
-                    <TextField value={responses[index].label} onChange={(e)=>handleEdit(e,index)}></TextField>
+                    <CustomTextField value={responses[index].label} onChange={(e)=>handleEdit(e,index)}></CustomTextField>
                 )
                 })}
-            <form style={{width:"100%"}} onSubmit={handleNewResponse}>
-            <TextField fullWidth value={newResponseLabel} onChange={(e)=>setNewResponseLabel(e.target.value)}></TextField>
+            <form style={{width:"100%",display:"flex",flexDirection:"row",justifyContent:"center"}} onSubmit={handleNewResponse}>
+            <CustomTextField 
+                value={newResponseLabel} 
+                onChange={(e)=>setNewResponseLabel(e.target.value)}>
+            </CustomTextField>
             </form>
+            </div>
+            </div>
+            
+            <div style={{flexDirection:"row",display:"flex",width:"100%"}}>
+                <IconButton>
+                    <SaveIcon></SaveIcon>
+                </IconButton>
+            </div>
         </div>
     )
 }

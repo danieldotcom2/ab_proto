@@ -14,7 +14,7 @@ import QuestionTabs from './QuestionTabs';
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    minWidth: "180px",
   },
   selectEmpty: {
     marginTop: theme.spacing(2),

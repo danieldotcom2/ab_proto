@@ -18,8 +18,11 @@ const QuestionEditor = (props) => {
     }
     return (
         <>
-        <QuestionForm type={type} label={label}></QuestionForm>
-        {response}
+        <div style={{display:"flex",flexDirection:"column",width:"100%"}}>
+            <QuestionForm type={type} label={label}></QuestionForm>
+            {response}
+        </div>
+
         </>
     )
 }

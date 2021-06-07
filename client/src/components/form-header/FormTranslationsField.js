@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     width:"100%",
     alignSelf:"center",
+    "&:hover":{
+      backgroundColor:"whitesmoke"
+    }
   },
   chips: {
     display: 'flex',

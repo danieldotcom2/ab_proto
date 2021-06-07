@@ -8,17 +8,22 @@ function App() {
   return (
     <BrowserRouter>
         <div className={"nav-bar"}> 
-        <nav>
-                <ul>
-                    <li><NavLink to="/" activeclass="active">Home</NavLink></li>
-                    <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
-                    <li><NavLink to="/subdomains" activeclass="active">Subdomains</NavLink></li>
-                </ul>
-        </nav>
+                <div style={{display:"flex",flexDirection:"row"}}>
+                    <NavLink style={{ textDecoration: 'none' }} to="/" activeclass="active">
+                        <div className={"nav-bar-button"}>
+                            Home
+                        </div>
+                    </NavLink>
+                    <NavLink style={{ textDecoration: 'none' }} to="/subdomains" activeclass="active">
+                        <div className={"nav-bar-button"}>
+                            Subdomains
+                        </div>
+                    </NavLink>
+                </div>
         </div>
         <Switch>
             <Route exact path="/">
-                <h1>My Home Page</h1>
+                <h1>AB Form Builder</h1>
             </Route>
             <Route exact path="/subdomains">
                 <SubdomainList></SubdomainList>

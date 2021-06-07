@@ -12,7 +12,7 @@ import CloseIcon from '@material-ui/icons/Close';
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    minWidth: "180px",
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -42,7 +42,6 @@ const QuestionForm = (props) => {
                 flexDirection:"row",
                 alignItems:"center",
                 justifyContent:"center",
-                width:"100%"
             }}>
             <form style={{width:"100%"}} onSubmit={(e)=>{
                 e.preventDefault()
@@ -51,6 +50,7 @@ const QuestionForm = (props) => {
             <TextField
                 fullWidth
                 autoFocus
+
                 label="Enter your question, select a question type and press `Enter`"
                 // helperText="To create a question, enter the text for your question, select a question type and press `Enter`"
                 variant="filled"
@@ -63,6 +63,7 @@ const QuestionForm = (props) => {
             <FormControl variant="filled" className={classes.formControl}>
                 <InputLabel htmlFor="filled-age-native-simple">Type</InputLabel>
                 <Select
+                fullWidth
                 native
                 value={type}
                 onChange={handleChange}
@@ -76,7 +77,7 @@ const QuestionForm = (props) => {
                 <option value={7}>Long Text</option>
                 </Select>
             </FormControl>
-            
+
             </div>
     )
 }

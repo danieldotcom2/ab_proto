@@ -21,7 +21,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box p={3}>
+        <Box>
           {children}
         </Box>
       )}
@@ -70,18 +70,22 @@ export default function QuestionTabs(props) {
   console.log("state",responses)
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={{backgroundColor:"whitesmoke",boxShadow: "rgb(60 64 67 / 30%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 1px 3px 1px"}}>
       <AppBar position="static" color={"secondary"}>
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Edit" {...a11yProps(0)} />
           <Tab label="Logic" {...a11yProps(1)} />
+          <Tab label="Translations" {...a11yProps(2)}/>
         </Tabs>
       </AppBar>
-      <TabPanel classes={{className:classes.tabPanel}} value={value} index={0}>
+      <TabPanel style={{padding:"0px"}} classes={{className:classes.tabPanel}} value={value} index={0}>
         <QuestionEditor label={label} type={type} responses={responses}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        Item three
       </TabPanel>
     </div>
   );

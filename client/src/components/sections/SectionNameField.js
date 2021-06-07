@@ -100,7 +100,7 @@ export default function SectionNameField(props) {
 
     return (
         <>
-            <div style={{display:'flex',flexDirection:'row'}}>
+            <div className={"form-field"} style={{display:'flex',flexDirection:'row'}}>
                 <form onSubmit={(e)=>{
                     e.preventDefault()
                     handleSave()
