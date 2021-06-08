@@ -57,10 +57,12 @@ export default function QuestionTabs(props) {
   const [value, setValue] = React.useState(0);
   const [label,setLabel] = useState(props.label)
   const [type,setType]=useState(props.type)
+  const [questionId,setQuestionId]=useState(props.questionId)
   const [responses,setResponses]=useState([])
 
   useEffect(()=>{
       setResponses(props.responses)
+      setQuestionId(props.questionId)
       console.log("props",props.responses)
   },[props])
 
@@ -70,7 +72,7 @@ export default function QuestionTabs(props) {
   console.log("state",responses)
 
   return (
-    <div className={classes.root} style={{backgroundColor:"whitesmoke",boxShadow: "rgb(60 64 67 / 30%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 1px 3px 1px"}}>
+    <div className={classes.root} style={{backgroundColor:"whitesmoke",boxShadow: "rgb(60 64 67 / 30%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 1px 3px 1px",borderRadius:"4px",overflow:"hidden"}}>
       <AppBar position="static" color={"secondary"}>
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Edit" {...a11yProps(0)} />
@@ -79,7 +81,7 @@ export default function QuestionTabs(props) {
         </Tabs>
       </AppBar>
       <TabPanel style={{padding:"0px"}} classes={{className:classes.tabPanel}} value={value} index={0}>
-        <QuestionEditor label={label} type={type} responses={responses}/>
+        <QuestionEditor label={label} type={type} responses={responses} questionId={questionId} acceptChanges={props.acceptChanges}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two

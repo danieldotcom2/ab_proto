@@ -94,7 +94,7 @@ class Question(db.Model):
   id = db.Column(db.Integer, primary_key = True)
   name = db.Column(db.String(1000), nullable = False)
   label = db.Column(db.String(1000), nullable = False)
-  description = db.Column(db.String(1000), nullable = False)
+  description = db.Column(db.String(1000), nullable=True)
   help_text = db.Column(db.String(300),nullable=True)
   required = db.Column(db.Boolean, default=False,nullable=False)
   is_active = db.Column(db.Boolean, default=True,nullable=False)

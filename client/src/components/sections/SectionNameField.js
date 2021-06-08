@@ -101,22 +101,23 @@ export default function SectionNameField(props) {
     return (
         <>
             <div className={"form-field"} style={{display:'flex',flexDirection:'row'}}>
-                <form onSubmit={(e)=>{
-                    e.preventDefault()
-                    handleSave()
-                    }
-                }>
+                <form 
+                    onSubmit={(e)=>{
+                        e.preventDefault()
+                        handleSave()
+                        }}
+                    style={{width:"100%"}}
+                    >
                 <TextField  
-                    autoFocus 
+                    fullWidth
                     required
-                    size="small"
+                    autoFocus
                     onChange={(e)=>setName(e.target.value)} 
                     value={name}
                     label="Section Name"
                     placeholder="Enter a name for this section..."
                     helperText="Section names ar optional and will appear at the top of each form section"
                     size="small"
-                    style={{paddingLeft:"10px"}}
                     margin="normal"
                     InputLabelProps={{
                         shrink: true,

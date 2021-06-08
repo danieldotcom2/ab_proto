@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import QuestionOptionsDisplay from './QuestionOptionsDisplay'
 import QuestionTabs from './QuestionTabs'
 
 const Question = (props) => {
@@ -6,6 +7,10 @@ const Question = (props) => {
     const [index, setIndex] = useState(props.index)
     // if (question !== props.question) setQuestion(props.question)
     const [edit,setEdit]= useState(false)
+
+    const acceptChanges = () => {
+        setEdit(false)
+    }
     return (
         <>
         {!edit 
@@ -14,10 +19,11 @@ const Question = (props) => {
             <div style={{display:"flex",flexDirection:"row"}}>
                 <span>{index + 1}.</span>
                 <span style={{marginLeft:"4px"}}>{question.label}</span>
-                </div>
+            </div>
+            <QuestionOptionsDisplay options={question.question_responses}></QuestionOptionsDisplay>
         </div>
         :
-        <QuestionTabs label={question.label} type={question.type} responses={question.question_responses}></QuestionTabs>
+        <QuestionTabs label={question.label} type={question.type} responses={question.question_responses} questionId={question.id} acceptChanges={acceptChanges}></QuestionTabs>
         }
         </>
     )

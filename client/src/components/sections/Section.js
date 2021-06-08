@@ -42,7 +42,7 @@ const Section = (props) => {
         }}>
             <SectionNameField sectionName={name} sectionId={sectionId}></SectionNameField>
             <SectionDescriptionField sectionId={sectionId} description={description}></SectionDescriptionField>
-            <SectionQuestions questions={questions}></SectionQuestions>
+            <SectionQuestions questions={questions} sectionName={name} sectionId={sectionId}></SectionQuestions>
         </div>
     )
 }

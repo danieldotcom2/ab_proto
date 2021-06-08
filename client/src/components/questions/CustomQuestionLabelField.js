@@ -8,51 +8,51 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import DirectionsIcon from '@material-ui/icons/Directions';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
-import CloseIcon from '@material-ui/icons/Close'
+
 const useStyles = makeStyles((theme) => ({
   root: {
+    boxShadow:"none",
+    border:"1px solid initial",
     padding: '2px 4px',
     display: 'flex',
     alignItems: 'center',
-    width: 700,
-    paddingLeft:"24px",
-    marginBottom:"5px",
+    width: 600,
   },
   input: {
-    marginLeft: theme.spacing(1),
-    flex: 1,
+    paddingBottom:"18px",
   },
   iconButton: {
     padding: 10,
-    color:"darkgray"
   },
   divider: {
     height: 28,
     margin: 4,
   },
+  
 }));
 
-export default function CustomTextField(props) {
+export default function CustomQuestionLabelField(props) {
   const classes = useStyles();
 
   return (
     <Paper className={classes.root}>
-        <RadioButtonUncheckedIcon style={{color:"rgba(0,0,0,0.26)",marginLeft:"4px"}}/>
+      <IconButton className={classes.iconButton} aria-label="menu">
+        <MenuIcon />
+      </IconButton>
       <InputBase
-        autoFocus={props.autoFocus}
+        autoFocus={true}
         className={classes.input}
-        placeholder="Enter response option..."
+        placeholder="Question"
         value={props.value}
         onChange={props.onChange}
-        inputProps={{ 'aria-label': 'search google maps' }}
+        inputProps={{ 'aria-label': 'search google maps',className:classes.input}}
       />
       {/* <IconButton type="submit" className={classes.iconButton} aria-label="search">
         <SearchIcon />
       </IconButton> */}
       <Divider className={classes.divider} orientation="vertical" />
-      <IconButton className={classes.iconButton} aria-label="directions">
-        <CloseIcon />
+      <IconButton color="primary" className={classes.iconButton} aria-label="directions">
+        <DeleteOutlineIcon />
       </IconButton>
     </Paper>
   );
